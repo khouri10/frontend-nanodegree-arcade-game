@@ -22,7 +22,9 @@ Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
     if (this.x > 505){
     	this.x = -2;
+        this.speed = Math.random() * (70 - 20) + 20
     }
+    //checks for collision with player
     if (this.x <= player.x + 60 && this.x >= player.x - 60 && this.y 
     	<= player.y + 20 && this.y >= player.y - 20 ){
     	reset();
@@ -89,8 +91,8 @@ Player.prototype.handleInput = function(key) {
 // Place the player object in a variable called player
 var player = new Player();
 var enemy1 = new Enemy (60, 20);
-var enemy2 = new Enemy (140, 50);
-var enemy3 = new Enemy (220, 30);
+var enemy2 = new Enemy (140, 70);
+var enemy3 = new Enemy (220, 45);
 var allEnemies = [enemy1, enemy2, enemy3];
 
 // This listens for key presses and sends the keys to your
