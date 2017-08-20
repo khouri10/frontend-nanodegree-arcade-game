@@ -1,5 +1,6 @@
 // Enemies our player must avoid
 
+var level = 1;
 
 
 var Enemy = function(y, speed) {
@@ -22,12 +23,15 @@ Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
     if (this.x > 505){
     	this.x = -2;
-        this.speed = Math.random() * (70 - 20) + 20
+        //adds random speed
+        this.speed = randomSpeed();
     }
     //checks for collision with player
     if (this.x <= player.x + 60 && this.x >= player.x - 60 && this.y 
     	<= player.y + 20 && this.y >= player.y - 20 ){
-    	reset();
+    	alert("Game Over! You will now return to level 1. Try again." )
+        level = 1;
+        reset();
     }
 };
 
@@ -53,7 +57,11 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.update = function(dt) {
-  
+  if(this.y < 30){
+    alert( "Level ".concat(level, " completed!"));
+    level += 1;
+    reset();
+  }
 };
 
 var reset = function() {
@@ -62,9 +70,18 @@ var reset = function() {
    enemy1.x = -110;
    enemy2.x = -110;
    enemy3.x = -110;
-
+   enemy1.speed = randomSpeed();
+   enemy2.speed = randomSpeed();
+   enemy3.speed = randomSpeed();
 
 };
+
+function randomSpeed () {
+   speed = Math.random() * ((70 - 20) + 20) * level;
+   return speed
+}
+
+
 
 
 Player.prototype.handleInput = function(key) {
@@ -77,11 +94,8 @@ Player.prototype.handleInput = function(key) {
     if (key == 'up' && this.y > 30) {
         this.y -=  90;
     }
-    if (key == 'down' && this.y < 600) {
+    if (key == 'down' && this.y < 400) {
         this.y += 90;
-    }
-    if (key == 'up' && this.y < 30) {
-        reset();
     }
 }
 
