@@ -23,7 +23,12 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505){
     	this.x = -2;
     }
+    if (this.x <= player.x + 60 && this.x >= player.x - 60 && this.y 
+    	<= player.y + 20 && this.y >= player.y - 20 ){
+    	reset();
+    }
 };
+
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -49,9 +54,14 @@ Player.prototype.update = function(dt) {
   
 };
 
-Player.prototype.reset = function() {
-   this.x = 200
-   this.y = 400
+var reset = function() {
+   player.x = 200;
+   player.y = 400;
+   enemy1.x = -110;
+   enemy2.x = -110;
+   enemy3.x = -110;
+
+
 };
 
 
@@ -69,7 +79,7 @@ Player.prototype.handleInput = function(key) {
         this.y += 90;
     }
     if (key == 'up' && this.y < 30) {
-        this.reset();
+        reset();
     }
 }
 
