@@ -1,16 +1,14 @@
-// Enemies our player must avoid
 
+//initial level of the game
 var level = 1;
 
-
-var Enemy = function(y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    this.x = -110
-    this.y = y
-    this.speed = speed
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+// Enemies our player must avoid
+var Enemy = function(y) {
+    // defines intial positions and speeds of the enemies
+    this.x = -110;
+    this.y = y;
+    this.speed = randomSpeed();
+    // The image/sprite for our enemies
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -21,15 +19,15 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
+    //once the enmy reach the end of screen return it returns to the start
     if (this.x > 505){
     	this.x = -2;
-        //adds random speed
         this.speed = randomSpeed();
     }
-    //checks for collision with player
+    //checks for collision with player 
     if (this.x <= player.x + 60 && this.x >= player.x - 60 && this.y 
     	<= player.y + 20 && this.y >= player.y - 20 ){
-    	alert("Game Over! You will now return to level 1. Try again." )
+    	alert("Game Over!" )
         level = 1;
         reset();
     }
@@ -57,13 +55,14 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.update = function(dt) {
+  //check if the player reach the water and moves to next level
   if(this.y < 30){
     alert( "Level ".concat(level, " completed!"));
     level += 1;
     reset();
   }
 };
-
+//reset all enemies and players
 var reset = function() {
    player.x = 200;
    player.y = 400;
@@ -76,14 +75,13 @@ var reset = function() {
 
 };
 
+//create the random speed range according to the level
 function randomSpeed () {
    speed = Math.random() * ((70 - 20) + 20) * level;
-   return speed
+   return speed;
 }
 
-
-
-
+//function to move the player inside the limits
 Player.prototype.handleInput = function(key) {
     if (key == 'left' && this.x > 5) {
         this.x -= 100;
@@ -97,16 +95,16 @@ Player.prototype.handleInput = function(key) {
     if (key == 'down' && this.y < 400) {
         this.y += 90;
     }
-}
+};
 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var player = new Player();
-var enemy1 = new Enemy (60, 20);
-var enemy2 = new Enemy (140, 70);
-var enemy3 = new Enemy (220, 45);
+var enemy1 = new Enemy (60);
+var enemy2 = new Enemy (140);
+var enemy3 = new Enemy (220);
 var allEnemies = [enemy1, enemy2, enemy3];
 
 // This listens for key presses and sends the keys to your
