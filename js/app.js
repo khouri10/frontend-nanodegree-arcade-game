@@ -24,14 +24,18 @@ Enemy.prototype.update = function(dt) {
     	this.x = -2;
         this.speed = randomSpeed();
     }
-    //checks for collision with player 
-    if (this.x <= player.x + 60 && this.x >= player.x - 60 && this.y 
-    	<= player.y + 20 && this.y >= player.y - 20 ){
-    	alert("Game Over!" )
-        level = 1;
-        reset();
-    }
+    checkCollisions(this);
 };
+
+var checkCollisions = function(enemy) {
+        //checks for collision  
+        if (enemy.x <= player.x + 60 && enemy.x >= player.x - 60 && enemy.y 
+            <= player.y + 20 && enemy.y >= player.y - 20 ){
+            alert("Game Over!" );
+            level = 1;
+            reset();
+        }
+    }
 
 
 // Draw the enemy on the screen, required method for game
