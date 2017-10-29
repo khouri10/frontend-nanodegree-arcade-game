@@ -24,18 +24,12 @@ Enemy.prototype.update = function(dt) {
     	this.x = -2;
         this.speed = randomSpeed();
     }
-    checkCollisions(this);
 };
 
-var checkCollisions = function(enemy) {
-        //checks for collision  
-        if (enemy.x <= player.x + 60 && enemy.x >= player.x - 60 && enemy.y 
-            <= player.y + 20 && enemy.y >= player.y - 20 ){
-            alert("Game Over!" );
-            level = 1;
-            reset();
-        }
-    }
+Enemy.prototype.checkCollision = function(player) {
+  return (this.x <= player.x + 60 && this.x >= player.x - 60 && this.y 
+      <= player.y + 20 && this.y >= player.y - 20 );
+}
 
 
 // Draw the enemy on the screen, required method for game
@@ -59,25 +53,10 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.update = function(dt) {
-  //check if the player reach the water and moves to next level
-  if(this.y < 30){
-    alert( "Level ".concat(level, " completed!"));
-    level += 1;
-    reset();
-  }
-};
-//reset all enemies and players
-var reset = function() {
-   player.x = 200;
-   player.y = 400;
-   enemy1.x = -110;
-   enemy2.x = -110;
-   enemy3.x = -110;
-   enemy1.speed = randomSpeed();
-   enemy2.speed = randomSpeed();
-   enemy3.speed = randomSpeed();
+  };
 
-};
+
+
 
 //create the random speed range according to the level
 function randomSpeed () {
