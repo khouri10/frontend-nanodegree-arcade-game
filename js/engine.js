@@ -98,7 +98,8 @@ var Engine = (function(global) {
     //if it collide, reset the game and restart level to 1
     function checkCollisions() {
         allEnemies.forEach(function(enemy) {
-            if (enemy.checkCollision(player)) {
+            if (enemy.x <= player.x + 60 && enemy.x >= player.x - 60 && enemy.y 
+      <= player.y + 20 && enemy.y >= player.y - 20 ) {
                 alert("Game Over!");
                 level = 1;
                 reset();  

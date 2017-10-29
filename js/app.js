@@ -26,10 +26,7 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-Enemy.prototype.checkCollision = function(player) {
-  return (this.x <= player.x + 60 && this.x >= player.x - 60 && this.y 
-      <= player.y + 20 && this.y >= player.y - 20 );
-}
+
 
 
 // Draw the enemy on the screen, required method for game
